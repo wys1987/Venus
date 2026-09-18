@@ -29,12 +29,14 @@
     showAlgebraInput: false,
     showMenuBar: false,
     showResetIcon: false,
-    perspective: "G",
     enableRightClick: false,
     errorDialogsActive: true,
-    appletOnLoad: function () {
+    appletOnLoad: function (api) {
       var l = document.getElementById("loading");
       if (l) l.style.display = "none";
+      if (api && api.setPerspective) {
+        try { api.setPerspective("G"); } catch (e) {}
+      }
     }
   };
   var applet = new GGBApplet(params, true);
