@@ -31,9 +31,14 @@
     showResetIcon: false,
     enableRightClick: false,
     errorDialogsActive: true,
-    appletOnLoad: function () {
+    appletOnLoad: function (api) {
       var l = document.getElementById("loading");
       if (l) l.style.display = "none";
+      // 课件可能以「图形区 + 空白的图形区2」双视图保存，导致画面被劈成两半、
+      // 右侧空白。这里强制切回单一图形区（G），去掉分割线和空白右侧。
+      if (api && api.setPerspective) {
+        try { api.setPerspective("G"); } catch (e) {}
+      }
     }
   };
   var applet = new GGBApplet(params, true);
