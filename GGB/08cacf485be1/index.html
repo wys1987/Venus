@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1.3 匀速车上跳起</title>
+<meta property="og:title" content="1.3 匀速车上跳起">
+<meta property="og:description" content="可交互 GeoGebra 课件">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GeoGebra 课件">
+<script src="https://www.geogebra.org/apps/deployggb.js"></script>
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+  #ggb{width:100vw;height:100vh}
+  #loading{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);color:#888;font-size:16px;z-index:10}
+</style>
+</head>
+<body>
+<div id="ggb"></div>
+<div id="loading">正在加载课件，请稍候…</div>
+<script>
+(function () {
+  var params = {
+    appName: "classic",
+    width: window.innerWidth,
+    height: window.innerHeight,
+    filename: "https://cdn.jsdelivr.net/gh/wys1987/Venus@main/GGB/08cacf485be1/1.3 匀速车上跳起.ggb",
+    showToolBar: true,
+    showAlgebraInput: false,
+    showMenuBar: true,
+    showResetIcon: true,
+    enableRightClick: false,
+    errorDialogsActive: true,
+    appletOnLoad: function () {
+      var l = document.getElementById("loading");
+      if (l) l.style.display = "none";
+    }
+  };
+  var applet = new GGBApplet(params, true);
+  applet.inject("ggb");
+})();
+</script>
+</body>
+</html>
