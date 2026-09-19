@@ -10,39 +10,53 @@
 <meta property="og:site_name" content="GeoGebra 课件">
 <script src="https://www.geogebra.org/apps/deployggb.js"></script>
 <style>
-  html,body{margin:0;height:100%;overflow:hidden;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
-  #ggb{width:100vw;height:100vh}
-  #loading{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);color:#888;font-size:16px;z-index:10}
+  html,body{margin:0;height:100%;background:#fff;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+  .wrap{display:flex;align-items:center;justify-content:center;height:100%}
+  .box{position:relative;border:0;}
+  #ggb{width:800px;height:600px}
+  #overlay{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(255,255,255,0.92);cursor:pointer;z-index:10}
+  #overlay .btn{padding:12px 28px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#334155;font-size:15px;box-shadow:0 2px 6px rgba(0,0,0,0.08)}
+  #loading{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#888;font-size:14px;z-index:9}
 </style>
 </head>
 <body>
-<div id="ggb"></div>
-<div id="loading">正在加载课件，请稍候…</div>
+<div class="wrap">
+  <div class="box">
+    <div id="ggb"></div>
+    <div id="loading">正在加载课件，请稍候…</div>
+    <div id="overlay"><span class="btn">▶ 点击运行</span></div>
+  </div>
+</div>
 <script>
 (function () {
   var params = {
     appName: "classic",
-    width: window.innerWidth,
-    height: window.innerHeight,
-    filename: "https://cdn.jsdelivr.net/gh/wys1987/Venus@main/GGB/11d92d1d03e8/1.5%20v-t%E5%9B%BE%E5%83%8F.ggb",
+    width: 800,
+    height: 600,
+    filename: "https://gcore.jsdelivr.net/gh/wys1987/Venus@main/GGB/11d92d1d03e8/1.5%20v-t%E5%9B%BE%E5%83%8F.ggb",
     showToolBar: false,
-    showAlgebraInput: false,
     showMenuBar: false,
-    showResetIcon: false,
-    enableRightClick: false,
-    errorDialogsActive: true,
+    showAlgebraInput: false,
+    allowStyleBar: false,
+    showFullscreenButton: true,
+    showResetIcon: true,
+    enableRightClick: true,
+    enableShiftDragZoom: true,
     appletOnLoad: function (api) {
       var l = document.getElementById("loading");
       if (l) l.style.display = "none";
-      // 课件可能以「图形区 + 空白的图形区2」双视图保存，导致画面被劈成两半、
-      // 右侧空白。这里强制切回单一图形区（G），去掉分割线和空白右侧。
       if (api && api.setPerspective) {
         try { api.setPerspective("G"); } catch (e) {}
       }
     }
   };
-  var applet = new GGBApplet(params, true);
-  applet.inject("ggb");
+  function inject() {
+    var o = document.getElementById("overlay");
+    if (o) o.style.display = "none";
+    var applet = new GGBApplet(params, true);
+    applet.inject("ggb");
+  }
+  inject();
 })();
 </script>
 </body>
