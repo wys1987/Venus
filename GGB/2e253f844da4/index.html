@@ -12,10 +12,11 @@
 <style>
   html,body{margin:0;height:100%;background:#fff;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
   .wrap{display:flex;align-items:center;justify-content:center;height:100%}
-  .box{position:relative;border:0;}
+  .box{position:relative;border:1px solid #cbd5e1;}
   #ggb{width:800px;height:600px}
-  #overlay{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(255,255,255,0.92);cursor:pointer;z-index:10}
-  #overlay .btn{padding:12px 28px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#334155;font-size:15px;box-shadow:0 2px 6px rgba(0,0,0,0.08)}
+  #ggb,#ggb *{border:none!important;box-shadow:none!important;outline:none!important}
+  #overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.92);cursor:pointer;z-index:10}
+  #overlay .btn{padding:12px 28px;border:0;border-radius:4px;background:#2D8CF0;color:#fff;font-size:15px;cursor:pointer}
   #loading{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#888;font-size:14px;z-index:9}
 </style>
 </head>
@@ -34,7 +35,7 @@
     width: 800,
     height: 600,
     filename: "https://gcore.jsdelivr.net/gh/wys1987/Venus@main/GGB/2e253f844da4/1.6%20%E5%8C%80%E5%8F%98%E9%80%9F%E4%BD%8D%E7%A7%BB%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC.ggb",
-    showToolBar: false,
+    showToolBar: true,
     showMenuBar: false,
     showAlgebraInput: false,
     allowStyleBar: false,
@@ -42,12 +43,20 @@
     showResetIcon: true,
     enableRightClick: true,
     enableShiftDragZoom: true,
+    borderColor: "#ffffff",
+    buttonBorderColor: "#cbd5e1",
+    buttonShadows: false,
     appletOnLoad: function (api) {
       var l = document.getElementById("loading");
       if (l) l.style.display = "none";
-      if (api && api.setPerspective) {
+      if (!api || !api.setPerspective) return;
+      // 强制只显示绘图区：文件可能自带「代数+绘图」分栏，加载后会覆盖，需延迟重设
+      var setG = function () {
         try { api.setPerspective("G"); } catch (e) {}
-      }
+      };
+      setG();
+      setTimeout(setG, 600);
+      setTimeout(setG, 1600);
     }
   };
   function inject() {
@@ -56,7 +65,7 @@
     var applet = new GGBApplet(params, true);
     applet.inject("ggb");
   }
-  inject();
+  document.getElementById("overlay").addEventListener("click", inject);
 })();
 </script>
 </body>
