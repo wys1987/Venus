@@ -12,10 +12,10 @@
 <style>
   html,body{margin:0;height:100%;background:#fff;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
   .wrap{display:flex;align-items:center;justify-content:center;height:100%}
-  .box{position:relative;border:1px solid #cbd5e1;}
+  .box{position:relative;border:0;}
   #ggb{width:800px;height:600px}
   #ggb,#ggb *{border:none!important;box-shadow:none!important;outline:none!important}
-  #overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.92);cursor:pointer;z-index:10}
+  #overlay{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(255,255,255,0.92);cursor:pointer;z-index:10}
   #overlay .btn{padding:12px 28px;border:0;border-radius:4px;background:#2D8CF0;color:#fff;font-size:15px;cursor:pointer}
   #loading{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#888;font-size:14px;z-index:9}
 </style>
@@ -35,7 +35,7 @@
     width: 800,
     height: 600,
     filename: "https://gcore.jsdelivr.net/gh/wys1987/Venus@main/GGB/9b96b4b3f110/1.1%20%E8%BD%AE%E5%AD%90%E4%B8%8A%E7%9A%84%E7%82%B9.ggb",
-    showToolBar: true,
+    showToolBar: false,
     showMenuBar: false,
     showAlgebraInput: false,
     allowStyleBar: false,
@@ -65,7 +65,7 @@
     var applet = new GGBApplet(params, true);
     applet.inject("ggb");
   }
-  document.getElementById("overlay").addEventListener("click", inject);
+  inject();
 })();
 </script>
 </body>
