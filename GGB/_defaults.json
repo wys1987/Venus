@@ -8,5 +8,5 @@
   "show_reset": true,
   "allow_right_click": true,
   "allow_drag": true,
-  "click_to_run": true
+  "click_to_run": false
 }
