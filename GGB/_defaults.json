@@ -1,12 +1,12 @@
 {
   "width": 800,
   "height": 600,
-  "show_toolbar": true,
-  "show_border": true,
+  "show_toolbar": false,
+  "show_border": false,
   "show_stylebar": false,
   "show_fullscreen": true,
   "show_reset": true,
   "allow_right_click": true,
-  "allow_drag": true,
-  "click_to_run": true
+  "allow_drag": false,
+  "click_to_run": false
 }
